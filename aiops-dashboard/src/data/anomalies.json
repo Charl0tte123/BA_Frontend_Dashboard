@@ -1,0 +1,43 @@
+[
+  {
+    "anomalyId": "ANO-001",
+    "source": "CloudWatch",
+    "status": "unchecked",
+    "detectedTs": "2024-01-15T10:30:00Z",
+    "llmSummary": "High CPU usage detected in production environment",
+    "pivot": {
+      "service": "web-service",
+      "errorCode": "CPU_HIGH",
+      "region": "eu-west-1",
+      "threshold": 85
+    }
+  },
+  {
+    "anomalyId": "ANO-002",
+    "source": "Prometheus",
+    "status": "acknowledged",
+    "detectedTs": "2024-01-15T09:15:00Z",
+    "checkedTs": "2024-01-15T09:45:00Z",
+    "llmSummary": "Memory leak detected in payment service",
+    "pivot": {
+      "service": "payment-service",
+      "errorCode": "MEMORY_LEAK",
+      "region": "us-east-1",
+      "threshold": 90
+    }
+  },
+  {
+    "anomalyId": "ANO-003",
+    "source": "Datadog",
+    "status": "resolved",
+    "detectedTs": "2024-01-15T08:00:00Z",
+    "checkedTs": "2024-01-15T08:30:00Z",
+    "llmSummary": "Database connection timeout resolved",
+    "pivot": {
+      "service": "database-service",
+      "errorCode": "DB_TIMEOUT",
+      "region": "eu-central-1",
+      "threshold": 95
+    }
+  }
+]
