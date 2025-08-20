@@ -436,7 +436,11 @@ onMounted(async () => {
   outline:2px solid var(--blue-600); outline-offset:1px;
   box-shadow:0 0 0 3px rgba(30,136,229,.15);
 }
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.kpi-row{
+  display:grid;
+  grid-template-columns:repeat(2,1fr); /* was repeat(4,1fr) */
+  gap:8px
+}
 .kpi{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px 10px}
 .kpi.small .kpi-title{color:var(--muted);font-size:11px}
 .kpi.small .kpi-value{font-size:20px;font-weight:700;color:var(--blue-700)}

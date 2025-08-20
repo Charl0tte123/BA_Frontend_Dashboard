@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted, watchEffect, defineComponent, h, PropType } from 'vue'
+import { ref, reactive, computed, onMounted, watchEffect, defineComponent, h } from 'vue'
+import type { PropType } from 'vue'
 
 type Incident = {
   id: string
@@ -203,7 +204,7 @@ const ChartCanvas = defineComponent({
 // Data loading
 async function loadData() {
   try {
-    const res = await fetch('/incidents.json', { cache: 'no-cache' })
+    const res = await fetch('/data/incidents.json', { cache: 'no-cache' })
     if (!res.ok) throw new Error(String(res.status))
     baseIncidents.value = await res.json()
   } catch {
@@ -233,8 +234,9 @@ onMounted(async () => {
 
 <template>
   <div class="dashboard">
+    <!-- Page headline inside the white plate -->
     <div class="super-title">
-      <h1>Anomalie‑Meldungsdashboard</h1>
+      <h1>Anomaly Dashboard</h1>
     </div>
 
     <header class="app-header">
@@ -242,6 +244,7 @@ onMounted(async () => {
     </header>
 
     <main class="two-col">
+      <!-- Left: ticket list -->
       <aside class="left-pane">
         <div class="toolbar sticky">
           <div class="filters">
@@ -261,12 +264,6 @@ onMounted(async () => {
                 <option value="done">Nur bearbeitet</option>
               </select>
             </label>
-          </div>
-          <div class="kpi-row">
-            <div class="kpi small"><div class="kpi-title">Gesamt</div><div class="kpi-value">{{ kpiTotal }}</div></div>
-            <div class="kpi small"><div class="kpi-title">Offen</div><div class="kpi-value">{{ kpiOpen }}</div></div>
-            <div class="kpi small"><div class="kpi-title">Erledigt</div><div class="kpi-value">{{ kpiDone }}</div></div>
-            <div class="kpi small"><div class="kpi-title">Ältester Offen</div><div class="kpi-value">{{ kpiOldestOpen }}</div></div>
           </div>
         </div>
 
@@ -310,8 +307,31 @@ onMounted(async () => {
         </div>
       </aside>
 
+      <!-- Right: analysis cards -->
       <section class="right-pane">
         <div class="cards">
+          <!-- New: compact KPI overview panel -->
+          <div class="panel kpi-overview">
+            <div class="kpi-grid">
+              <div class="tile">
+                <div class="t-title">Gesamt</div>
+                <div class="t-val">{{ kpiTotal }}</div>
+              </div>
+              <div class="tile">
+                <div class="t-title">Offen</div>
+                <div class="t-val">{{ kpiOpen }}</div>
+              </div>
+              <div class="tile">
+                <div class="t-title">Erledigt</div>
+                <div class="t-val">{{ kpiDone }}</div>
+              </div>
+              <div class="tile">
+                <div class="t-title">Ältester offen</div>
+                <div class="t-val">{{ kpiOldestOpen }}</div>
+              </div>
+            </div>
+          </div>
+
           <div class="panel">
             <div class="panel-header">
               <div class="panel-title">Status</div>
@@ -406,70 +426,14 @@ onMounted(async () => {
   overflow: visible; /* was hidden; allow dropdown to render outside */
   overflow: hidden;          /* clip to pane; list handles scrolling */
 }
-.right-pane{
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;           /* prevent page scroll */
-  min-height:0;
-}
-.toolbar.sticky{
-  position:sticky;
-  top:0;
-  background:var(--surface);
-  z-index:2;
-  border-bottom:1px solid var(--border);
-  padding:12px
-}
-.filters{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  flex-wrap:wrap;
-  margin-bottom:8px
-}
-.filters select{
-  padding:8px 10px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:#fff;
-  appearance:none;
-  -webkit-appearance:none;
-  -moz-appearance:none;
-  padding-right:28px;
-  color:#000;
-  background:#fff;
-  border:1px solid var(--blue-600);
-  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 20 12" fill="none"><path d="M2 2l8 8 8-8" stroke="%231565c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
-  background-repeat:no-repeat;
-  background-position:right 10px center;
-  background-size:14px 10px;
-}
-.kpi-row{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px
-}
-.kpi{
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:8px 10px
-}
-.kpi.small .kpi-title{
-  color:var(--muted);
-  font-size:11px
-}
-.kpi.small .kpi-value{
-  font-size:20px;
-  font-weight:700;
-  color:var(--blue-700)
-}
 .list{
   overflow:auto;
   padding:12px;
   display:flex;
   flex-direction:column;
-  gap:12px
+  gap:12px;
+  flex:1;                            /* take remaining height */
+  min-height:0;                      /* enable overflow */
 }
 .card{
   background:var(--surface);
@@ -598,12 +562,12 @@ button.primary:disabled{
 }
 .right-pane .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  grid-template-columns:repeat(2, minmax(300px,1fr)); /* 2 columns => 4 cards in 2 rows */
   gap:16px;
   flex:1;
-  overflow:auto;
-  padding-right:4px;         /* small breathing room for scrollbar */
   min-height:0;
+  overflow:auto;                     /* internal scroll */
+  padding-right:4px;         /* small breathing room for scrollbar */
 }
 .panel{
   background:var(--surface);
@@ -714,7 +678,7 @@ button.primary:disabled{
 }
 
 .super-title{
-  max-width:1300px;
+  max-width:1440px;
   margin:20px auto 0;
   padding:0 16px 6px;
   text-align:center;
@@ -726,5 +690,29 @@ button.primary:disabled{
   font-weight:800;
   color:var(--blue-800);
   letter-spacing:.2px;
+}
+
+/* KPI overview panel on the right */
+.kpi-overview .kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(120px,1fr)); /* was repeat(4, ...) */
+  gap:12px;
+}
+.kpi-overview .tile{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 12px;
+}
+.kpi-overview .t-title{
+  font-size:12px; color:var(--muted);
+}
+.kpi-overview .t-val{
+  font-size:22px; font-weight:800; color:var(--blue-700);
+}
+
+/* Responsive: stack right grid on narrow screens */
+@media (max-width: 900px){
+  .right-pane .cards{ grid-template-columns:1fr; }
 }
 </style>
