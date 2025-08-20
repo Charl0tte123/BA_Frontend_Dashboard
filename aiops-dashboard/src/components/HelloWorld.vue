@@ -56,6 +56,12 @@ function priority(it: Incident) {
   return { key: 2, label: 'niedrig', cls: 'dot-low' }
 }
 
+// Add: map prio to blue tone class (low=light, mid=mid, high=dark)
+function cardTone(it: Incident) {
+  const key = priority(it).key
+  return key === 0 ? 'card-tone-dark' : key === 1 ? 'card-tone-mid' : 'card-tone-light'
+}
+
 const visibleIncidents = computed<Incident[]>(() => {
   let items = mergedIncidents.value
   if (filterMode.value === 'open') items = items.filter(i => !i.processed)
@@ -278,7 +284,11 @@ onMounted(async () => {
         </div>
 
         <div class="list">
-          <article v-for="it in visibleIncidents" :key="it.id" class="card list-item" :class="{processed: it.processed}">
+          <article
+            v-for="it in visibleIncidents"
+            :key="it.id"
+            :class="['card list-item', { processed: it.processed }, cardTone(it)]"
+          >
             <div class="card-header">
               <div class="prio-chip">
                 <span class="dot" :class="priority(it).cls"></span>
@@ -369,12 +379,17 @@ onMounted(async () => {
   --text:#0d1b2a;
   --muted:#6b7a90;
   --surface:#ffffff;
-  --bg:#f7f9fc;
+  --bg:#fbfdff; /* was #f7f9fc, make background lighter */
   --border:#e0e7ff;
   --green:#2e7d32;
   --yellow:#f9a825;
   --orange:#ef6c00;
   --red:#d32f2f;
+
+  /* Add blue tone palette for incident cards */
+  --card-blue-50:#f3f8ff;
+  --card-blue-100:#e7f0ff;
+  --card-blue-200:#d8e7ff;
 }
 .dashboard{color:var(--text);background:var(--bg);min-height:100vh}
 .app-header{
@@ -471,6 +486,20 @@ button.primary:disabled{opacity:.6;cursor:not-allowed}
 
 /* Footer */
 .app-footer{max-width:1300px;margin:24px auto;padding:0 16px;color:var(--muted)}
+
+/* Tone styles for incident cards (overrides default surface) */
+.card-tone-light{
+  background:var(--card-blue-50);
+  border-color:#e1ecff;
+}
+.card-tone-mid{
+  background:var(--card-blue-100);
+  border-color:#d3e3ff;
+}
+.card-tone-dark{
+  background:var(--card-blue-200);
+  border-color:#c6dbff;
+}
 
 @media (max-width: 1024px){
   .two-col{grid-template-columns:1fr}
