@@ -1,4 +1,4 @@
-<script setup lang="ts>
+<script setup lang="ts">
 import { ref, reactive, computed, onMounted, watchEffect, defineComponent, h, PropType } from 'vue'
 
 type Incident = {

@@ -481,7 +481,10 @@ button.primary:disabled{opacity:.6;cursor:not-allowed}
   background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:.2s
 }
 .switch-input:checked + .switch-slider{background:rgba(46,125,50,.2);border-color:#a5d6a7}
-.switch-input:checked + .switch-slider::after{left=21px;background:#2e7d32}
+.switch-input:checked + .switch-slider::after{
+  left:21px;
+  background:#2e7d32
+}
 .switch-label{font-size:12px;color:var(--muted)}
 
 /* Right: 4 panels grid */
