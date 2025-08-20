@@ -394,7 +394,7 @@ onMounted(async () => {
 .app-header{
   background:linear-gradient(90deg,var(--blue-800),var(--blue-600));
   color:#fff;padding:16px 20px;
-  box-shadow:0 2px 8px rgba(0,0,0,.12);
+  box-shadow:none; /* was: 0 2px 8px rgba(0,0,0,.12) */
 }
 .app-header h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.2px}
 
