@@ -177,23 +177,34 @@ const ChartCanvas = defineComponent({
         ctx.fill()
       } else if (props.kind === 'bar') {
         const max = Math.max(1, ...props.values)
-        const pad = 24, base = h - 24
+        const pad = 24, base = h - 36 /* leave room for x labels */
         const bw = Math.max(10, (w - pad*2) / props.values.length - 8)
-        ctx.strokeStyle = '#e0e7ff'
-        ctx.lineWidth = 1
+        ctx.strokeStyle = '#e0e7ff'; ctx.lineWidth = 1
         for (let y=0;y<=4;y++){
           const yy = base - (base-16)*(y/4)
           ctx.beginPath(); ctx.moveTo(pad, yy); ctx.lineTo(w-pad, yy); ctx.stroke()
         }
         props.values.forEach((v,idx)=>{
-          const x = pad + idx*((w - pad*2)/props.values.length) + 4
+          const slot = (w - pad*2)/props.values.length
+          const x = pad + idx*slot + 4
           const bh = (v/max) * (base-16)
           ctx.fillStyle = palette[idx % palette.length]
           ctx.fillRect(x, base-bh, bw, bh)
         })
+        // x-axis labels
+        ctx.fillStyle = '#64748b'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'top'
+        ctx.font = '10px system-ui'
+        props.labels.forEach((lbl, idx) => {
+          const slot = (w - pad*2)/props.values.length
+          const xCenter = pad + idx*slot + 4 + bw/2
+          const t = lbl.length > 12 ? (lbl.slice(0,11) + '…') : lbl
+          ctx.fillText(t, xCenter, base + 4)
+        })
       } else { // line
         const max = Math.max(1, ...props.values)
-        const pad = 24, base = h - 24
+        const pad = 24, base = h - 36 /* leave room for x labels */
         const step = (w - pad*2) / Math.max(1, props.values.length-1)
         ctx.strokeStyle = '#e0e7ff'; ctx.lineWidth = 1
         for (let y=0;y<=4;y++){
@@ -208,6 +219,17 @@ const ChartCanvas = defineComponent({
           if (idx===0) ctx.moveTo(x,y); else ctx.lineTo(x,y)
         })
         ctx.stroke()
+        // x-axis labels (skip some to avoid clutter)
+        ctx.fillStyle = '#64748b'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'top'
+        ctx.font = '10px system-ui'
+        const skip = Math.max(1, Math.ceil(props.labels.length / 8))
+        props.labels.forEach((lbl, idx) => {
+          if (idx % skip) return
+          const x = pad + idx*step
+          ctx.fillText(lbl, x, base + 4)
+        })
       }
     }
     onMounted(draw)
@@ -347,6 +369,13 @@ onMounted(async () => {
           <div class="panel">
             <div class="panel-header"><div class="panel-title">Kategorien</div></div>
             <ChartCanvas kind="bar" :labels="byCategory.labels" :values="byCategory.values" />
+            <!-- New: legend list with category names and counts -->
+            <ul class="legend-list">
+              <li v-for="(lbl, i) in byCategory.labels" :key="lbl" class="chip">
+                <span>{{ lbl }}</span>
+                <span class="muted">({{ byCategory.values[i] }})</span>
+              </li>
+            </ul>
           </div>
 
           <div class="panel">
@@ -537,4 +566,18 @@ button.primary:disabled{opacity:.6;cursor:not-allowed}
   .left-pane{order:2}
   .right-pane{order:1}
 }
+
+/* New styles for legend list under charts */
+.legend-list{
+  margin:6px 0 0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:4px 12px;
+  font-size:12px;
+  color:#6b7a90;
+}
+.legend-list .chip{ display:flex; align-items:center; gap:6px; }
+.legend-list .muted{ color:#6b7a90; }
 </style>
