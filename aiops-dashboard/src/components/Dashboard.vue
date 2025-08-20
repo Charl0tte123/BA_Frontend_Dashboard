@@ -363,7 +363,7 @@ onMounted(async () => {
   --card-blue-100:#e7f0ff;
   --card-blue-200:#d8e7ff;
 }
-.dashboard{color:var(--text);background:var(--bg);min-height:100vh}
+.dashboard{color:var(--text);background:var(--bg);min-height:100vh; position: relative;}
 .app-header{
   background:linear-gradient(90deg,var(--blue-800),var(--blue-600));
   color:#fff;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,.12);
@@ -427,6 +427,26 @@ button.primary:disabled{opacity:.6;cursor:not-allowed}
   background: rgba(30,136,229,0.14);
   border-color: var(--blue-800);
 }
+
+/* ensure stacking context */
+.dashboard{ position: relative; }
+
+/* big white background plate behind all content */
+.dashboard::before{
+  content:'';
+  position: fixed;
+  inset: 0 auto auto 50%;
+  transform: translateX(-50%);
+  width: min(1500px, 96vw);
+  height: 100vh;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.06);
+  z-index: 0;
+}
+
+/* lift real content above the plate */
+.dashboard > *{ position: relative; z-index: 1; }
 
 @media (max-width:1024px){.two-col{grid-template-columns:1fr}.left-pane{order:2}.right-pane{order:1}}
 
