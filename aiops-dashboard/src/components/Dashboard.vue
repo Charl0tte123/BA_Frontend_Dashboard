@@ -350,10 +350,10 @@ onMounted(async () => {
   --blue-600:#1976d2;
   --blue-500:#1e88e5;
   --blue-100:#e3f2fd;
-  --text:#0d1b2a;
+  --text:#000;  /* Standard-Textfarbe schwarz */
   --muted:#6b7a90;
   --surface:#ffffff;
-  --bg:#fbfdff;
+  --bg:#fffaf2; /* warm weiß/beige Hintergrund */
   --border:#e0e7ff;
   --green:#2e7d32;
   --yellow:#f9a825;
@@ -408,8 +408,38 @@ button.primary:disabled{opacity:.6;cursor:not-allowed}
 .dot-high{background:var(--red)}.dot-medium{background:var(--orange)}.dot-low{background:var(--yellow)}.dot-done{background:var(--green)}
 .chart-canvas{width:100%;height:200px;display:block}
 .app-footer{max-width:1300px;margin:24px auto;padding:0 16px;color:var(--muted)}
-.card-tone-light{background:var(--card-blue-50);border-color:#e1ecff}
-.card-tone-mid{background:var(--card-blue-100);border-color:#d3e3ff}
-.card-tone-dark{background:var(--card-blue-200);border-color:#c6dbff}
+
+/* Text in weißen Flächen schwarz */
+.toolbar.sticky,
+.card,
+.panel{ color:#000; }
+
+/* Incident-Karten: hellblau, leicht transparent + dunkelblaue Umrandung */
+.card-tone-light{
+  background: rgba(30,136,229,0.06);
+  border-color: var(--blue-700);
+}
+.card-tone-mid{
+  background: rgba(30,136,229,0.10);
+  border-color: var(--blue-700);
+}
+.card-tone-dark{
+  background: rgba(30,136,229,0.14);
+  border-color: var(--blue-800);
+}
+
 @media (max-width:1024px){.two-col{grid-template-columns:1fr}.left-pane{order:2}.right-pane{order:1}}
+
+/* Hide Vite/Vue starter logos globally (even if App.vue still renders them) */
+:global(.logo),
+:global(img[alt="Vite logo"]),
+:global(img[alt="Vue logo"]) {
+  display: none !important;
+}
+
+/* Optional: also hide the wrapping links from the starter header */
+:global(a[href="https://vitejs.dev"]),
+:global(a[href="https://vuejs.org/"]) {
+  display: none !important;
+}
 </style>

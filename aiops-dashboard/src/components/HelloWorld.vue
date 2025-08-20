@@ -369,17 +369,16 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-/* Theme: strong blue on off‑white */
 :root{
   --blue-800:#0d47a1;
   --blue-700:#1565c0;
   --blue-600:#1976d2;
   --blue-500:#1e88e5;
   --blue-100:#e3f2fd;
-  --text:#0d1b2a;
+  --text:#000;  /* Standard-Textfarbe schwarz */
   --muted:#6b7a90;
   --surface:#ffffff;
-  --bg:#fbfdff; /* was #f7f9fc, make background lighter */
+  --bg:#fffaf2; /* warm weiß/beige Hintergrund */
   --border:#e0e7ff;
   --green:#2e7d32;
   --yellow:#f9a825;
@@ -487,18 +486,23 @@ button.primary:disabled{opacity:.6;cursor:not-allowed}
 /* Footer */
 .app-footer{max-width:1300px;margin:24px auto;padding:0 16px;color:var(--muted)}
 
-/* Tone styles for incident cards (overrides default surface) */
+/* Text in weißen Flächen schwarz */
+.toolbar.sticky,
+.card,
+.panel{ color:#000; }
+
+/* Incident-Karten: hellblau, leicht transparent + dunkelblaue Umrandung */
 .card-tone-light{
-  background:var(--card-blue-50);
-  border-color:#e1ecff;
+  background: rgba(30,136,229,0.06); /* #1e88e5 @ 6% */
+  border-color: var(--blue-700);
 }
 .card-tone-mid{
-  background:var(--card-blue-100);
-  border-color:#d3e3ff;
+  background: rgba(30,136,229,0.10);
+  border-color: var(--blue-700);
 }
 .card-tone-dark{
-  background:var(--card-blue-200);
-  border-color:#c6dbff;
+  background: rgba(30,136,229,0.14);
+  border-color: var(--blue-800);
 }
 
 @media (max-width: 1024px){
