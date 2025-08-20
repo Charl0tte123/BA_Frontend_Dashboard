@@ -234,7 +234,6 @@ onMounted(async () => {
 
 <template>
   <div class="dashboard">
-    <!-- Page headline inside the white plate -->
     <div class="super-title">
       <h1>Anomaly Dashboard</h1>
     </div>
@@ -680,22 +679,29 @@ button.primary:disabled{
 .super-title{
   max-width:1440px;
   margin:20px auto 0;
-  padding:0 16px 6px;
+  padding:0 16px 10px;
   text-align:center;
+  position:relative;
+  z-index:3; /* make sure it stays above background plates */
 }
 .super-title h1{
   margin:0;
-  font-size:clamp(28px, 4.2vw, 48px);
+  font-size:clamp(32px, 4.5vw, 56px);
   line-height:1.1;
-  font-weight:800;
-  color:var(--blue-800);
-  letter-spacing:.2px;
+  font-weight:900;
+  letter-spacing:.3px;
+  /* gradient text */
+  background:linear-gradient(90deg, #0b3a91, #0d47a1, #1565c0);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:#0d47a1; /* fallback */
 }
 
 /* KPI overview panel on the right */
 .kpi-overview .kpi-grid{
   display:grid;
-  grid-template-columns:repeat(2, minmax(120px,1fr)); /* was repeat(4, ...) */
+  grid-template-columns:repeat(2, minmax(120px,1fr));
   gap:12px;
 }
 .kpi-overview .tile{
@@ -716,3 +722,4 @@ button.primary:disabled{
   .right-pane .cards{ grid-template-columns:1fr; }
 }
 </style>
+

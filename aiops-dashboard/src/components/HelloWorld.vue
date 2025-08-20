@@ -219,7 +219,7 @@ const ChartCanvas = defineComponent({
 // Data loading (extended demo)
 async function loadData() {
   try {
-    const res = await fetch('/incidents.json', { cache: 'no-cache' })
+    const res = await fetch('/data/incidents.json', { cache: 'no-cache' }) // was '/incidents.json'
     if (!res.ok) throw new Error(String(res.status))
     baseIncidents.value = await res.json()
   } catch {
