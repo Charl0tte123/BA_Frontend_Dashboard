@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts>
 import { ref, reactive, computed, onMounted, watchEffect, defineComponent, h, PropType } from 'vue'
 
 type Incident = {
@@ -370,11 +370,11 @@ onMounted(async () => {
 }
 .app-header h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.2px}
 .two-col{display:grid;grid-template-columns:420px 1fr;gap:16px;max-width:1300px;margin:16px auto;padding:0 16px}
-.left-pane{display:flex;flex-direction:column;min-height:70vh;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.left-pane{display:flex;flex-direction:column;min-height:70vh;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;overflow: visible; /* was hidden; allow dropdown to render outside */}
 .right-pane{display:block}
 .toolbar.sticky{position:sticky;top:0;background:var(--surface);z-index:2;border-bottom:1px solid var(--border);padding:12px}
 .filters{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
-.filters select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff}
+.filters select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff;appearance:none; -webkit-appearance:none; -moz-appearance:none;padding-right:28px;color:#000;background:#fff;border:1px solid var(--blue-600);background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 20 12" fill="none"><path d="M2 2l8 8 8-8" stroke="%231565c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');background-repeat:no-repeat; background-position:right 10px center; background-size:14px 10px;}
 .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .kpi{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px 10px}
 .kpi.small .kpi-title{color:var(--muted);font-size:11px}
@@ -390,7 +390,8 @@ onMounted(async () => {
 .card-actions{display:flex;gap:8px;align-items:center}
 .row{display:flex;gap:8px;align-items:center}
 input[type="email"]{padding:8px 10px;border:1px solid var(--border);border-radius:8px;flex:1;min-width:0}
-button.primary{background:var(--blue-600);color:#fff;border:1px solid var(--blue-600);padding:8px 12px;border-radius:8px;cursor:pointer}
+button.primary{background:var(--blue-600);color:#fff;border:1px solid var(--blue-600);padding:8px 12px;border-radius:8px;cursor:pointer;color:#000;background:var(--blue-100);border:1px solid var(--blue-600);}
+button.primary:hover{ background:#eef5ff }
 button.primary:disabled{opacity:.6;cursor:not-allowed}
 .switch{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
 .switch-input{position:absolute;opacity:0;width:0;height:0}

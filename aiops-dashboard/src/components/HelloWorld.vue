@@ -1,4 +1,4 @@
-'<script setup lang="ts">
+<script setup lang="ts">
 import { ref, reactive, computed, onMounted, watchEffect, defineComponent, h, PropType } from 'vue'
 
 type Incident = {
@@ -407,7 +407,8 @@ onMounted(async () => {
 }
 .left-pane{
   display:flex;flex-direction:column;min-height:70vh;
-  background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  overflow: visible; /* was hidden; allow dropdown to render outside */
 }
 .right-pane{display:block}
 
@@ -417,8 +418,23 @@ onMounted(async () => {
   border-bottom:1px solid var(--border);padding:12px
 }
 .filters{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.filters select,
+.filters select option,
+.filters select optgroup{
+  color:#000;
+  background:#fff;
+}
 .filters select{
-  padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#fff
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  padding-right:28px;
+  color:#000; background:#fff;
+  border:1px solid var(--blue-600);
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 20 12" fill="none"><path d="M2 2l8 8 8-8" stroke="%231565c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-repeat:no-repeat; background-position:right 10px center; background-size:14px 10px;
+}
+.filters select:focus{
+  outline:2px solid var(--blue-600); outline-offset:1px;
+  box-shadow:0 0 0 3px rgba(30,136,229,.15);
 }
 .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .kpi{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px 10px}
@@ -445,8 +461,12 @@ input[type="email"]{
   padding:8px 10px;border:1px solid var(--border);border-radius:8px;flex:1;min-width:0
 }
 button.primary{
-  background:var(--blue-600);color:#fff;border:1px solid var(--blue-600);padding:8px 12px;border-radius:8px;cursor:pointer
+  background:var(--blue-600);color:#fff;border:1px solid var(--blue-600);padding:8px 12px;border-radius:8px;cursor:pointer;
+  color:#000;
+  background:var(--blue-100);
+  border:1px solid var(--blue-600);
 }
+button.primary:hover{ background:#eef5ff }
 button.primary:disabled{opacity:.6;cursor:not-allowed}
 
 /* Switch */
@@ -461,7 +481,7 @@ button.primary:disabled{opacity:.6;cursor:not-allowed}
   background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:.2s
 }
 .switch-input:checked + .switch-slider{background:rgba(46,125,50,.2);border-color:#a5d6a7}
-.switch-input:checked + .switch-slider::after{left:21px;background:#2e7d32}
+.switch-input:checked + .switch-slider::after{left=21px;background:#2e7d32}
 .switch-label{font-size:12px;color:var(--muted)}
 
 /* Right: 4 panels grid */
