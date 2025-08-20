@@ -28,13 +28,12 @@ const sample: Anomaly[] = [
 ];
 
 export async function fetchAnomalies(): Promise<Anomaly[]> {
-  // Keine API mehr im Einsatz; nur für lokale Tests belassen.
+  // In echt: return fetch('/api/anomalies').then(r => r.json())
   await new Promise(r => setTimeout(r, 200));
-  // structuredClone kann bei Proxies scheitern -> sichere JSON-Kopie
-  return JSON.parse(JSON.stringify(sample)) as Anomaly[];
+  return structuredClone(sample);
 }
 
 export async function updateAnomalyStatus(id: string, status: Anomaly['status']): Promise<void> {
-  // Keine echte API. No-op.
+  // In echt: await fetch(`/api/anomalies/${id}`, { method:'PUT', body: JSON.stringify({status}) })
   return;
 }

@@ -5,6 +5,8 @@ import KpiCards from './components/KpiCards.vue';
 import AnomalyFilters from './components/AnomalyFilters.vue';
 import AnomalyTable from './components/AnomalyTable.vue';
 
+// Removed local example data
+
 const all = ref<Anomaly[]>([]);
 const loading = ref(false);
 
@@ -85,7 +87,7 @@ onMounted(load);
     <AnomalyTable :items="filtered" @status="onStatus" />
 
     <footer>
-      <small>Demo‑Dashboard • Vue 3 + TS • Beispiel‑Daten aus lokaler JSON</small>
+      <small>Demo‑Dashboard • Vue 3 + TS • Beispiel‑Daten via Mock‑API</small>
     </footer>
   </div>
 </template>
@@ -96,8 +98,6 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 h1{font-size:22px;margin:0}
 header button{border:0;background:#0ea5e9;color:#fff;border-radius:10px;padding:10px 14px;cursor:pointer}
 footer{margin:24px 0;color:#6b7280}
-body{background:#f6f8fa}
-</style>
 body{background:#f6f8fa}
 </style>
     try {
