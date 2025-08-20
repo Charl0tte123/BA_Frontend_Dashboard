@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Incident Dashboard</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Incident Dashboard</h1>
+    <nav class="tabs">
+      <button class="tab-btn active" data-target="#overview">Übersicht</button>
+      <button class="tab-btn" data-target="#incidents">Incidents</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="overview">
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpi-title">Gesamt</div>
+          <div class="kpi-value" id="kpi-total">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-title">Offen</div>
+          <div class="kpi-value" id="kpi-open">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-title">Bearbeitet</div>
+          <div class="kpi-value" id="kpi-done">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-title">Ältester Offener</div>
+          <div class="kpi-value" id="kpi-oldest">–</div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item"><span class="dot dot-high"></span> hoch (lange offen)</div>
+        <div class="legend-item"><span class="dot dot-medium"></span> mittel</div>
+        <div class="legend-item"><span class="dot dot-low"></span> niedrig</div>
+        <div class="legend-item"><span class="dot dot-done"></span> erledigt</div>
+      </div>
+    </section>
+
+    <section id="incidents" hidden>
+      <div class="toolbar">
+        <label>
+          Sortierung:
+          <select id="sort-select">
+            <option value="urgency">Nach Dringlichkeit</option>
+            <option value="newest">Neueste zuerst</option>
+            <option value="oldest">Älteste zuerst</option>
+          </select>
+        </label>
+        <label class="spacer"></label>
+        <label>
+          Filter:
+          <select id="filter-select">
+            <option value="all">Alle</option>
+            <option value="open">Nur offen</option>
+            <option value="done">Nur bearbeitet</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="incident-list" class="cards"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>Hinweis: Änderungen werden lokal im Browser gespeichert.</small>
+  </footer>
+
+  <script src="./app.js" type="module"></script>
+</body>
+</html>

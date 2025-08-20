@@ -1,0 +1,90 @@
+[
+  {
+    "id": "INC-1001",
+    "title": "Temperaturspitze im Kühlraum",
+    "category": "Sensorik",
+    "location": "Werk A",
+    "area": "Kühlkette",
+    "description": "Unerwarteter Anstieg auf 9°C für 12 Minuten.",
+    "reportedAt": "2025-08-20T07:30:00Z",
+    "processed": false,
+    "assignedTo": ""
+  },
+  {
+    "id": "INC-1002",
+    "title": "Anomalie im Stromverbrauch",
+    "category": "Energie",
+    "location": "Werk B",
+    "area": "Produktion 2",
+    "description": "Lastspitze von +35% gegenüber Durchschnitt.",
+    "reportedAt": "2025-08-20T04:00:00Z",
+    "processed": false,
+    "assignedTo": ""
+  },
+  {
+    "id": "INC-1003",
+    "title": "Ausfall Kamera 3",
+    "category": "Sicherheit",
+    "location": "Zentrale",
+    "area": "Eingang Ost",
+    "description": "Keine Daten seit 2 Stunden.",
+    "reportedAt": "2025-08-19T10:00:00Z",
+    "processed": false,
+    "assignedTo": ""
+  },
+  {
+    "id": "INC-1004",
+    "title": "Fehlmengen im Lagerbestand",
+    "category": "Logistik",
+    "location": "Lager Nord",
+    "area": "Gang 7",
+    "description": "Differenz von 18 Einheiten bei SKU 4711.",
+    "reportedAt": "2025-08-16T08:15:00Z",
+    "processed": false,
+    "assignedTo": ""
+  },
+  {
+    "id": "INC-1005",
+    "title": "Feuchtigkeitssensor meldet Dauerwert",
+    "category": "Sensorik",
+    "location": "Werk A",
+    "area": "Linie 4",
+    "description": "Wert bleibt konstant bei 82% rF.",
+    "reportedAt": "2025-08-12T14:40:00Z",
+    "processed": true,
+    "assignedTo": "technik@firma.de"
+  },
+  {
+    "id": "INC-1006",
+    "title": "Ungewöhnliche Login-Versuche",
+    "category": "IT",
+    "location": "Cloud",
+    "area": "IAM",
+    "description": "Mehrere fehlgeschlagene Logins aus unbekannten IPs.",
+    "reportedAt": "2025-08-08T22:20:00Z",
+    "processed": false,
+    "assignedTo": ""
+  },
+  {
+    "id": "INC-1007",
+    "title": "Druckabfall in Leitung",
+    "category": "Instandhaltung",
+    "location": "Werk C",
+    "area": "Hydraulik",
+    "description": "Druck -15% unter Mindestwert für 5 Min.",
+    "reportedAt": "2025-08-02T06:10:00Z",
+    "processed": true,
+    "assignedTo": "maintenance@firma.de"
+  },
+  {
+    "id": "INC-1008",
+    "title": "Abweichung im Ausschuss",
+    "category": "Qualität",
+    "location": "Werk B",
+    "area": "Linie 1",
+    "description": "Ausschussrate +12% zum Wochenschnitt.",
+    "reportedAt": "2025-08-01T11:05:00Z",
+    "processed": false,
+    "assignedTo": ""
+  }
+]
