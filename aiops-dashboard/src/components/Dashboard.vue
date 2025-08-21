@@ -768,13 +768,13 @@ button.primary:disabled{
 
 /* Elevate only the 5 right-side panels */
 .right-pane .panel{
-  border-color:#d7e3ff;                 /* slightly bluer outline */
-  box-shadow:0 6px 14px rgba(13,71,161,.06); /* soft lift */
+  border:1.5px solid #b7c6ff;              /* clearer outline */
+  box-shadow:0 8px 18px rgba(13,71,161,.08); /* a touch more lift */
 }
 
 /* Outline charts inside those panels */
 .right-pane .panel .chart-canvas{
-  border:1px solid var(--border);
+  border:1.5px solid #d7e3ff;               /* match panel tint */
   border-radius:8px;
   background:#fff;
 }
