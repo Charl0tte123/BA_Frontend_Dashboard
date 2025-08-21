@@ -48,12 +48,12 @@ const kpiOldestOpen = computed(() => {
 })
 
 function priority(it: Incident) {
-  if (it.processed) return { key: 3, label: 'erledigt', cls: 'dot-done' }
+  if (it.processed) return { key: 3, label: 'erledigt', cls: 'dot-done', textCls: 'prio-text-done' }
   const now = new Date()
   const d = daysBetween(now, new Date(it.reportedAt))
-  if (d >= 7) return { key: 0, label: 'hoch', cls: 'dot-high' }
-  if (d >= 3) return { key: 1, label: 'mittel', cls: 'dot-medium' }
-  return { key: 2, label: 'niedrig', cls: 'dot-low' }
+  if (d >= 7) return { key: 0, label: 'hoch', cls: 'dot-high', textCls: 'prio-text-high' }
+  if (d >= 3) return { key: 1, label: 'mittel', cls: 'dot-medium', textCls: 'prio-text-medium' }
+  return { key: 2, label: 'niedrig', cls: 'dot-low', textCls: 'prio-text-low' }
 }
 function cardTone(it: Incident) {
   const key = priority(it).key
@@ -298,7 +298,9 @@ onMounted(async () => {
             <div class="card-header">
               <div class="prio-chip">
                 <span class="dot" :class="priority(it).cls"></span>
-                {{ it.processed ? 'erledigt' : priority(it).label }}
+                <span :class="priority(it).textCls">
+                  {{ it.processed ? 'erledigt' : priority(it).label }}
+                </span>
               </div>
               <div class="card-title">{{ it.title }}</div>
             </div>
@@ -778,5 +780,10 @@ button.primary:disabled{
   border-radius:8px;
   background:#fff;
 }
+
+.prio-text-high{ color:var(--red); font-weight:700; }
+.prio-text-medium{ color:var(--orange); }
+.prio-text-low{ color:var(--green); }
+.prio-text-done{ color:var(--green); }
 </style>
 
