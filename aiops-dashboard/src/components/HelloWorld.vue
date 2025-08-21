@@ -561,6 +561,19 @@ button.primary:disabled{opacity:.6;cursor:not-allowed}
   border-color: var(--blue-800);
 }
 
+/* Elevate only right-side panels */
+.right-pane .panel{
+  border-color:#d7e3ff;
+  box-shadow:0 6px 14px rgba(13,71,161,.06);
+}
+
+/* Outline charts inside those panels */
+.right-pane .panel .chart-canvas{
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+}
+
 @media (max-width: 1024px){
   .two-col{grid-template-columns:1fr}
   .left-pane{order:2}

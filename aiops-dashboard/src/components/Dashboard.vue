@@ -765,5 +765,18 @@ button.primary:disabled{
 }
 .legend-list .chip{ display:flex; align-items:center; gap:6px; }
 .legend-list .muted{ color:var(--muted); }
+
+/* Elevate only the 5 right-side panels */
+.right-pane .panel{
+  border-color:#d7e3ff;                 /* slightly bluer outline */
+  box-shadow:0 6px 14px rgba(13,71,161,.06); /* soft lift */
+}
+
+/* Outline charts inside those panels */
+.right-pane .panel .chart-canvas{
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+}
 </style>
 
