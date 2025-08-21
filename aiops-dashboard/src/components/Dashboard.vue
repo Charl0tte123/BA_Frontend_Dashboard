@@ -51,9 +51,9 @@ function priority(it: Incident) {
   if (it.processed) return { key: 3, label: 'erledigt', cls: 'dot-done', textCls: 'prio-text-done' }
   const now = new Date()
   const d = daysBetween(now, new Date(it.reportedAt))
-  if (d >= 7) return { key: 0, label: 'hoch', cls: 'dot-high', textCls: 'prio-text-high' }
-  if (d >= 3) return { key: 1, label: 'mittel', cls: 'dot-medium', textCls: 'prio-text-medium' }
-  return { key: 2, label: 'niedrig', cls: 'dot-low', textCls: 'prio-text-low' }
+  if (d >= 7) return { key: 0, label: 'hoch', cls: 'dot-high', textCls: 'prio-text-high', chipCls:'prio-chip-high' }
+  if (d >= 3) return { key: 1, label: 'mittel', cls: 'dot-medium', textCls: 'prio-text-medium', chipCls:'prio-chip-medium' }
+  return { key: 2, label: 'niedrig', cls: 'dot-low', textCls: 'prio-text-low', chipCls:'prio-chip-low' }
 }
 function cardTone(it: Incident) {
   const key = priority(it).key
@@ -296,7 +296,7 @@ onMounted(async () => {
             :class="['card list-item', { processed: it.processed }, cardTone(it)]"
           >
             <div class="card-header">
-              <div class="prio-chip">
+              <div class="prio-chip" :class="priority(it).chipCls">
                 <span class="dot" :class="priority(it).cls"></span>
                 <span :class="priority(it).textCls">
                   {{ it.processed ? 'erledigt' : priority(it).label }}
@@ -486,12 +486,44 @@ onMounted(async () => {
   flex:1
 }
 .prio-chip{
-  display:flex;
+  display:inline-flex;
   align-items:center;
-  gap:6px;
-  font-size:12px;
-  color:var(--muted)
+  justify-content:center;   /* center text horizontally */
+  text-align:center;        /* center text inside */
+  gap:0;                    /* no inner gap since dot is hidden */
+  font-size:11px;
+  color:var(--muted);
+  padding:2px 8px;
+  border-radius:999px;
+  border:1px solid transparent;
+  background:transparent;
+  margin-left:-6px; /* keep chip slightly more left */
 }
+
+/* hide the dot so the text truly centers */
+.prio-chip .dot{ display:none; }
+
+/* Solid pastel backgrounds + borders in the strong color */
+.prio-chip-high{
+  background:#E9978EFF;              /* pastel red */
+  border-color: var(--red);
+  color: var(--red); /* text in red */
+}
+.prio-chip-medium{
+  background:#E2BB7DFF;              /* pastel orange */
+  border-color: var(--orange);
+  color: var(--orange); /* text in orange */
+}
+.prio-chip-low{
+  background:#C3ECC6FF;              /* pastel green */
+  border-color: var(--green);
+  color: var(--green); /* text in green */
+}
+
+/* Strong (non-pastel) bold text colors */
+.prio-text-high{ color:var(--red); font-weight:700; }
+.prio-text-medium{ color:var(--orange); font-weight:700; }
+.prio-text-low{ color:var(--green); font-weight:700; }
 .meta{
   display:flex;
   flex-wrap:wrap;
@@ -781,9 +813,11 @@ button.primary:disabled{
   background:#fff;
 }
 
-.prio-text-high{ color:var(--red); font-weight:700; }
-.prio-text-medium{ color:var(--orange); }
-.prio-text-low{ color:var(--green); }
-.prio-text-done{ color:var(--green); }
+/* Make header layout explicit so chip + title align nicely */
+.card-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 </style>
 
