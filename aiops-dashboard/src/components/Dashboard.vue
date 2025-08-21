@@ -506,24 +506,24 @@ onMounted(async () => {
 /* Solid pastel backgrounds + borders in the strong color */
 .prio-chip-high{
   background:#E9978EFF;              /* pastel red */
-  border-color: var(--red);
-  color: var(--red); /* text in red */
+  border-color:#d32f2f;  /* dark red */
+  color:#d32f2f;         /* text red */
 }
 .prio-chip-medium{
   background:#E2BB7DFF;              /* pastel orange */
-  border-color: var(--orange);
-  color: var(--orange); /* text in orange */
+  border-color:#ef6c00;  /* orange */
+  color:#ef6c00;         /* text orange */
 }
 .prio-chip-low{
   background:#C3ECC6FF;              /* pastel green */
-  border-color: var(--green);
-  color: var(--green); /* text in green */
+  border-color:#2e7d32;  /* green */
+  color:#2e7d32;         /* text green */
 }
 
-/* Strong (non-pastel) bold text colors */
-.prio-text-high{ color:var(--red); font-weight:700; }
-.prio-text-medium{ color:var(--orange); font-weight:700; }
-.prio-text-low{ color:var(--green); font-weight:700; }
+/* Strong (non-pastel) bold text colors as hex */
+.prio-text-high{ color:#9A0D0DFF; font-weight:700; }
+.prio-text-medium{ color:#AA4D01FF; font-weight:700; }
+.prio-text-low{ color:#1F5C22FF; font-weight:700; }
 .meta{
   display:flex;
   flex-wrap:wrap;
