@@ -18,6 +18,11 @@ type Incident = {
 const LS_KEY = 'incidentOverrides.v1'
 const sortMode = ref<'urgency'|'newest'|'oldest'>('urgency')
 const filterMode = ref<'all'|'open'|'done'>('all')
+// NEW: Kategorie Auswahl
+const selectedCategory = ref<'all'|string>('all')
+const allCategories = computed(() =>
+  Array.from(new Set(mergedIncidents.value.map(i=>i.category))).sort((a,b)=>a.localeCompare(b,'de-DE'))
+)
 
 const baseIncidents = ref<Incident[]>([])
 const overrides = ref<Record<string, Partial<Incident>>>({})
@@ -62,8 +67,18 @@ function cardTone(it: Incident) {
 
 const visibleIncidents = computed<Incident[]>(() => {
   let items = mergedIncidents.value
+  if (selectedCategory.value !== 'all')
+    items = items.filter(i => i.category === selectedCategory.value)
   if (filterMode.value === 'open') items = items.filter(i => !i.processed)
   if (filterMode.value === 'done') items = items.filter(i => i.processed)
+  if (sortMode.value === 'category') {
+    return [...items].sort((a,b)=>{
+      const c = a.category.localeCompare(b.category,'de-DE')
+      if (c) return c
+      // innerhalb gleicher Kategorie nach Meldedatum (älter zuerst)
+      return new Date(a.reportedAt).getTime() - new Date(b.reportedAt).getTime()
+    })
+  }
   const score = (it: Incident) => {
     if (sortMode.value === 'newest') return -new Date(it.reportedAt).getTime()
     if (sortMode.value === 'oldest') return new Date(it.reportedAt).getTime()
@@ -276,6 +291,7 @@ onMounted(async () => {
                 <option value="urgency">Dringlichkeit</option>
                 <option value="newest">Neueste zuerst</option>
                 <option value="oldest">Älteste zuerst</option>
+                <option value="category">Kategorie</option>
               </select>
             </label>
             <label>
@@ -284,6 +300,16 @@ onMounted(async () => {
                 <option value="all">Alle</option>
                 <option value="open">Nur offen</option>
                 <option value="done">Nur bearbeitet</option>
+              </select>
+            </label>
+            <!-- Neue Kategorie-Filterung -->
+            <label>
+              Kategorie:
+              <select v-model="selectedCategory">
+                <option value="all">Alle</option>
+                <option v-for="cat in allCategories" :key="cat" :value="cat">
+                  {{ cat }}
+                </option>
               </select>
             </label>
           </div>
