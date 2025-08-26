@@ -185,7 +185,7 @@ const ChartCanvas = defineComponent({
         ctx.arc(cx,cy,r*0.6,0,Math.PI*2); ctx.fill()
       } else if (props.kind === 'bar') {
         const max = Math.max(1, ...props.values)
-        const pad = 24, base = h - 36 /* leave room for x labels */
+        const pad = 24, base = h - 36 
         const bw = Math.max(10, (w - pad*2) / Math.max(1, props.values.length) - 8)
         ctx.strokeStyle = '#e0e7ff'; ctx.lineWidth = 1
         for (let y=0;y<=4;y++){ const yy = base - (base-16)*(y/4); ctx.beginPath(); ctx.moveTo(pad, yy); ctx.lineTo(w-pad, yy); ctx.stroke() }
@@ -209,7 +209,7 @@ const ChartCanvas = defineComponent({
         })
       } else {
         const max = Math.max(1, ...props.values)
-        const pad = 24, base = h - 36 /* leave room for x labels */
+        const pad = 24, base = h - 36 
         const step = (w - pad*2) / Math.max(1, props.values.length-1)
         ctx.strokeStyle = '#e0e7ff'; ctx.lineWidth = 1
         for (let y=0;y<=4;y++){ const yy = base - (base-16)*(y/4); ctx.beginPath(); ctx.moveTo(pad, yy); ctx.lineTo(w-pad, yy); ctx.stroke() }
@@ -431,10 +431,10 @@ onMounted(async () => {
   --blue-600:#1976d2;
   --blue-500:#1e88e5;
   --blue-100:#e3f2fd;
-  --text:#000;  /* Standard-Textfarbe schwarz */
+  --text:#000;  
   --muted:#6b7a90;
   --surface:#ffffff;
-  --bg:#fffaf2; /* warm weiß/beige Hintergrund */
+  --bg:#fffaf2; 
   --border:#e0e7ff;
   --green:#2e7d32;
   --yellow:#f9a825;
@@ -456,7 +456,7 @@ onMounted(async () => {
   background:linear-gradient(90deg,var(--blue-800),var(--blue-600));
   color:#fff;
   padding:16px 20px;
-  box-shadow:none; /* was: 0 2px 8px rgba(0,0,0,.12) */
+  box-shadow:none; 
 }
 .app-header h1{
   margin:0;
@@ -466,11 +466,11 @@ onMounted(async () => {
 }
 .two-col{
   display:grid;
-  grid-template-columns: 460px 1fr; /* was 420px: left pane a bit wider */
+  grid-template-columns: 460px 1fr; 
   gap:16px;
-  max-width:1440px;          /* was 1300px: a bit wider */
-  flex:1;                    /* take remaining height */
-  min-height:0;              /* allow children to size correctly */
+  max-width:1440px;          
+  flex:1;                    
+  min-height:0;              
 }
 .left-pane{
   display:flex;
@@ -480,8 +480,8 @@ onMounted(async () => {
   border:1px solid var(--border);
   border-radius:12px;
   overflow:hidden;
-  overflow: visible; /* was hidden; allow dropdown to render outside */
-  overflow: hidden;          /* clip to pane; list handles scrolling */
+  overflow: visible; 
+  overflow: hidden;          
 }
 .list{
   overflow:auto;
@@ -489,8 +489,8 @@ onMounted(async () => {
   display:flex;
   flex-direction:column;
   gap:12px;
-  flex:1;                            /* take remaining height */
-  min-height:0;                      /* enable overflow */
+  flex:1;                            
+  min-height:0;                      
 }
 .card{
   background:var(--surface);
@@ -514,39 +514,39 @@ onMounted(async () => {
 .prio-chip{
   display:inline-flex;
   align-items:center;
-  justify-content:center;   /* center text horizontally */
-  text-align:center;        /* center text inside */
-  gap:0;                    /* no inner gap since dot is hidden */
+  justify-content:center;   
+  text-align:center;        
+  gap:0;                    
   font-size:11px;
   color:var(--muted);
   padding:2px 8px;
   border-radius:999px;
   border:1px solid transparent;
   background:transparent;
-  margin-left:-6px; /* keep chip slightly more left */
+  margin-left:-6px; 
 }
 
-/* hide the dot so the text truly centers */
+
 .prio-chip .dot{ display:none; }
 
-/* Solid pastel backgrounds + borders in the strong color */
+
 .prio-chip-high{
-  background:#E9978EFF;              /* pastel red */
-  border-color:#d32f2f;  /* dark red */
-  color:#d32f2f;         /* text red */
+  background:#E9978EFF;            
+  border-color:#d32f2f;  
+  color:#d32f2f;        
 }
 .prio-chip-medium{
-  background:#E2BB7DFF;              /* pastel orange */
-  border-color:#ef6c00;  /* orange */
-  color:#ef6c00;         /* text orange */
+  background:#E2BB7DFF;             
+  border-color:#ef6c00;  
+  color:#ef6c00;         
 }
 .prio-chip-low{
-  background:#C3ECC6FF;              /* pastel green */
-  border-color:#2e7d32;  /* green */
-  color:#2e7d32;         /* text green */
+  background:#C3ECC6FF;              
+  border-color:#2e7d32;  
+  color:#2e7d32;         
 }
 
-/* Strong (non-pastel) bold text colors as hex */
+
 .prio-text-high{ color:#9A0D0DFF; font-weight:700; }
 .prio-text-medium{ color:#AA4D01FF; font-weight:700; }
 .prio-text-low{ color:#1F5C22FF; font-weight:700; }
@@ -651,12 +651,12 @@ button.primary:disabled{
 }
 .right-pane .cards{
   display:grid;
-  grid-template-columns:repeat(2, minmax(300px,1fr)); /* 2 columns => 4 cards in 2 rows */
+  grid-template-columns:repeat(2, minmax(300px,1fr)); 
   gap:16px;
   flex:1;
   min-height:0;
-  overflow:auto;                     /* internal scroll */
-  padding-right:4px;         /* small breathing room for scrollbar */
+  overflow:auto;                     
+  padding-right:4px;         
 }
 .panel{
   background:var(--surface);
@@ -710,14 +710,14 @@ button.primary:disabled{
   color:var(--muted)
 }
 
-/* Text in weißen Flächen schwarz */
+
 .toolbar.sticky,
 .card,
 .panel{
    color:#000;
 }
 
-/* Incident-Karten: hellblau, leicht transparent + dunkelblaue Umrandung */
+
 .card-tone-light{
   background: rgba(30,136,229,0.06);
   border-color: var(--blue-700);
@@ -731,10 +731,10 @@ button.primary:disabled{
   border-color: var(--blue-800);
 }
 
-/* ensure stacking context */
+
 .dashboard{ position: relative; }
 
-/* big white background plate behind all content */
+
 .dashboard::before{
   content:'';
   position: fixed;
@@ -748,19 +748,19 @@ button.primary:disabled{
   z-index: 0;
 }
 
-/* lift real content above the plate */
+
 .dashboard > *{ position: relative; z-index: 1; }
 
 @media (max-width:1024px){.two-col{grid-template-columns:1fr}.left-pane{order:2}.right-pane{order:1}}
 
-/* Hide Vite/Vue starter logos globally (even if App.vue still renders them) */
+
 :global(.logo),
 :global(img[alt="Vite logo"]),
 :global(img[alt="Vue logo"]) {
   display: none !important;
 }
 
-/* Optional: also hide the wrapping links from the starter header */
+
 :global(a[href="https://vitejs.dev"]),
 :global(a[href="https://vuejs.org/"]) {
   display: none !important;
@@ -772,7 +772,7 @@ button.primary:disabled{
   padding:0 16px 10px;
   text-align:center;
   position:relative;
-  z-index:3; /* make sure it stays above background plates */
+  z-index:3; 
 }
 .super-title h1{
   margin:0;
@@ -780,15 +780,15 @@ button.primary:disabled{
   line-height:1.1;
   font-weight:900;
   letter-spacing:.3px;
-  /* gradient text */
+ 
   background:linear-gradient(90deg, #0b3a91, #0d47a1, #1565c0);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
-  color:#0d47a1; /* fallback */
+  color:#0d47a1; 
 }
 
-/* KPI overview panel on the right */
+
 .kpi-overview .kpi-grid{
   display:grid;
   grid-template-columns:repeat(2, minmax(120px,1fr));
@@ -807,12 +807,12 @@ button.primary:disabled{
   font-size:22px; font-weight:800; color:var(--blue-700);
 }
 
-/* Responsive: stack right grid on narrow screens */
+
 @media (max-width: 900px){
   .right-pane .cards{ grid-template-columns:1fr; }
 }
 
-/* Compact legend list below charts */
+
 .legend-list{
   margin:6px 0 0;
   padding:0;
@@ -826,20 +826,20 @@ button.primary:disabled{
 .legend-list .chip{ display:flex; align-items:center; gap:6px; }
 .legend-list .muted{ color:var(--muted); }
 
-/* Elevate only the 5 right-side panels */
+
 .right-pane .panel{
-  border:1.5px solid #b7c6ff;              /* clearer outline */
-  box-shadow:0 8px 18px rgba(13,71,161,.08); /* a touch more lift */
+  border:1.5px solid #b7c6ff;              
+  box-shadow:0 8px 18px rgba(13,71,161,.08); 
 }
 
-/* Outline charts inside those panels */
+
 .right-pane .panel .chart-canvas{
-  border:1.5px solid #d7e3ff;               /* match panel tint */
+  border:1.5px solid #d7e3ff;               
   border-radius:8px;
   background:#fff;
 }
 
-/* Make header layout explicit so chip + title align nicely */
+
 .card-header{
   display:flex;
   align-items:center;
